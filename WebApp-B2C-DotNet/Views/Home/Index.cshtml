@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron" style ="background-color:#CCDBDC;">
+    <h1>@ViewBag.DisplayName</h1>
+    <p class="lead">Demonstration on website with B2C configured for Sign Up, Sign In and Profile Editing.</p>
+    <p><a href="https://azure.microsoft.com/en-us/services/active-directory-b2c/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <div class="row" style="margin-left:0px;  padding-bottom: 48px; text-align: center;">
+        <p>@ViewBag.Data</p>
+        <div class="col-md-4">
+            <h2>Order a Pencil</h2>
+            <p>
+                Click here to order a pencil. 
+            </p>
+            <input class="btn btn-default" type="button" value="Order now! &raquo;" onclick="location.href='@Url.Action("OrderPencil", "Home")'" />
+        </div>
+        <div class="col-md-4">
+            <h2>Order a Pen</h2>
+            <p>Click here to order a pen. </p>
+            <input class="btn btn-default" type="button" value="Order now! &raquo;" onclick="location.href='@Url.Action("OrderPen", "Home")'" />
+        </div>
+        <div class="col-md-4">
+            <h2>Order an Eraser</h2>
+            <p>Click here to order an Eraser. </p>
+            <input class="btn btn-default" type="button" value="Order now! &raquo;" onclick="location.href='@Url.Action("OrderEraser", "Home")'" />
+        </div>
+      </div>
+
+    <div class="row">
+        
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+
+                    <div class="dataBlock" style="background:@item.color; margin:20px; padding:15px;">
+
+                        <p><b>Item:</b> @item.order</p>
+                        <p><b>Description:</b> @item.desc</p>
+                        <p><b>Purchased:</b> @item.date</p>
+                    </div>
+      
+                }
+            }
+        </div>
+        <p>@ViewBag.Data</p>
+
+}
